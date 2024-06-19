@@ -10,7 +10,7 @@ export default function RandomGenerator() {
     }
 
     function handleGenerateRandomHexColor() {
-        const hex = [0, 1, 2, 3, 4, 5, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F']
+        const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F']
         let hexColor = '#'
 
         for (let i = 0; i < 6; i++) {
@@ -29,7 +29,12 @@ export default function RandomGenerator() {
 
     }
     useEffect(()=> {
-        typeOfColor === 'hex' ? handleGenerateRandomHexColor() : handleGenerateRandomRgbColor()
+        // typeOfColor === 'hex' ? handleGenerateRandomHexColor() : handleGenerateRandomRgbColor()
+        if(typeOfColor === 'hex'){
+            handleGenerateRandomHexColor()
+        } else{
+            handleGenerateRandomRgbColor()
+        }
     }, [typeOfColor])
 
     return (
