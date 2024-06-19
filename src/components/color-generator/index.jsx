@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 export default function RandomGenerator() {
 
     const [typeOfColor, setTypeofColor] = useState('hex')
     const [color, setColor] = useState('#000000')
 
-    function handleHexUtility(length) {
+    const handleHexUtility = useCallback((length) => {
         return Math.floor(Math.random() * length)
-    }
+    }, [])
 
-    function handleGenerateRandomHexColor() {
+    const handleGenerateRandomHexColor = useCallback(()=> {
         const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F']
         let hexColor = '#'
 
@@ -18,24 +18,24 @@ export default function RandomGenerator() {
         }
 
         setColor(hexColor)
-    }
+    }, [handleHexUtility])
 
-    function handleGenerateRandomRgbColor() {
+    const handleGenerateRandomRgbColor = useCallback(()=> {
         const r = handleHexUtility(256)
         const g = handleHexUtility(256)
         const b = handleHexUtility(256)
 
         setColor(`rgb(${r}, ${g}, ${b})`)
 
-    }
-    useEffect(()=> {
+    }, [handleHexUtility])
+    useEffect(() => {
         // typeOfColor === 'hex' ? handleGenerateRandomHexColor() : handleGenerateRandomRgbColor()
-        if(typeOfColor === 'hex'){
+        if (typeOfColor === 'hex') {
             handleGenerateRandomHexColor()
-        } else{
+        } else {
             handleGenerateRandomRgbColor()
         }
-    }, [typeOfColor])
+    }, [typeOfColor, handleGenerateRandomHexColor, handleGenerateRandomRgbColor])
 
     return (
         <div style={{
