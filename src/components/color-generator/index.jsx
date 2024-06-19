@@ -30,7 +30,7 @@ export default function RandomGenerator() {
     }
     useEffect(()=> {
         typeOfColor === 'hex' ? handleGenerateRandomHexColor() : handleGenerateRandomRgbColor()
-    }, typeOfColor)
+    }, [typeOfColor])
 
     return (
         <div style={{
